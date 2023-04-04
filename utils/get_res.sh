@@ -4,7 +4,7 @@
 
 utils_path="$(dirname ${0})"
 res_path="${utils_path}/../res"
-svn checkout https://github.com/PokeAPI/sprites/trunk/sprites/pokemon/versions/generation-iv/platinum "${res_path}"
+svn export https://github.com/PokeAPI/sprites/trunk/sprites/pokemon/versions/generation-iv/platinum "${res_path}"
 rm -rf "${res_path}/back" "${res_path}/shiny" "${res_path}/female"
 
 # Keep only one Unown form
