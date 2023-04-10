@@ -34,7 +34,7 @@ rm "${res_path}"/493-*
 
 for id in {1..493}; do
     printf "${id}/493\n"
-    name="$(curl "https://pokeapi.co/api/v2/pokemon/${id}" | yq ".name")"
+    name="$(curl "https://pokeapi.co/api/v2/pokemon/${id}" | jq ".name")"
     mv "${res_path}/${id}.png" "${res_path}/${id}-${name^}.png"
 done 
 
