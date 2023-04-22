@@ -15,7 +15,7 @@ for dependency in ${dependencies}; do
 done
 
 if [ -n "${missing_dependencies}" ]; then
-    printf "\e[31;1mError: The following dependencies are not in PATH: ${missing_dependencies}\e[0m"
+    printf "\e[31;1mError: The following dependencies are not in PATH: ${missing_dependencies}\e[0m\n"
     exit 1
 fi
 
