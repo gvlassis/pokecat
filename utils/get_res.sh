@@ -15,7 +15,8 @@ for dependency in ${dependencies}; do
 done
 
 if [ -n "${missing_dependencies}" ]; then
-    printf "\e[31;1mError: The following dependencies are not in PATH: ${missing_dependencies}\e[0m\n"
+    script_path="$(readlink -f "${0}")"
+    printf "\e[31;1m${script_path} (Error): The following dependencies are not in PATH: ${missing_dependencies}.\e[0m\n"
     exit 1
 fi
 
@@ -63,10 +64,3 @@ mv "${res_path}/492-Shaymin-land.png" "${res_path}/492-Shaymin.png"
 
 # Trim transparency
 mogrify -trim "${res_path}/*"
-
-unset dependencies
-unset missing_dependencies
-unset dependency
-unset utils_path
-unset res_path
-unset name
