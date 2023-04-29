@@ -21,7 +21,7 @@ if [ -n "${missing_dependencies}" ]; then
 fi
 
 src_path="$(readlink -f "$(dirname "${0}")")"
-res_path="$(readlink -f "$(dirname "${src_path}")")/res"
+res_path="$(dirname "${src_path}")/res"
 if [ ! -d "${res_path}" ]; then
     script_path="$(readlink -f "${0}")"
     printf "\e[31;1m${script_path} (Error): ${res_path} is not a directory. Run utils/get_res.sh.\e[0m\n"

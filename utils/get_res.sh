@@ -21,7 +21,7 @@ if [ -n "${missing_dependencies}" ]; then
 fi
 
 src_path="$(readlink -f "$(dirname "${0}")")"
-res_path="$(readlink -f "$(dirname "${src_path}")")/res"
+res_path="$(dirname "${src_path}")/res"
 svn export --force https://github.com/PokeAPI/sprites/trunk/sprites/pokemon/versions/generation-iv/platinum "${res_path}"
 rm -rf "${res_path}/back" "${res_path}/shiny" "${res_path}/female"
 
