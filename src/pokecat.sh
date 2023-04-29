@@ -20,7 +20,7 @@ if [ -n "${missing_dependencies}" ]; then
     exit 1
 fi
 
-src_path="$(readlink -f "$(dirname "${0}")")"
+src_path="$(dirname "$(readlink -f "${0}")")"
 res_path="$(dirname "${src_path}")/res"
 if [ ! -d "${res_path}" ]; then
     script_path="$(readlink -f "${0}")"
