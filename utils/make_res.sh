@@ -66,7 +66,7 @@ function main(){
 
     for id in {1..493}; do
         printf "\e[35;1m${id}/493\e[0m\n"
-        local name="$(curl "https://pokeapi.co/api/v2/pokemon/${id}" | jq -r ".name")"
+        local name="$(curl -L "https://pokeapi.co/api/v2/pokemon/${id}" | jq -r ".name")"
         mv "${res_path}/${id}.png" "${res_path}/${id}-${name^}.png"
     done 
 
