@@ -40,6 +40,6 @@ There are 3 Bash scripts, namely `./utils.sh`, `./make_res.sh` and `./pokecat.sh
         ln -sf "${PWD}/pokecat.sh" "${HOME}/.local/bin/pkcat"
         pkcat
 
-    Another good idea might be to call `./pokecat.sh` in your shell's initialization script (e.g. `.bashrc`, `.zshrc`). For example, for Bash:
+    Another good idea might is to call `./pokecat.sh` in your shell's initialization script (e.g. `.bashrc`, `.zshrc`). For example, for Bash:
 
         printf "${PWD}/pokecat.sh\n" >> "${HOME}/.bashrc"
