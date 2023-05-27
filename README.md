@@ -20,7 +20,7 @@ There are 3 Bash scripts, namely `./utils.sh`, `./make_res.sh` and `./pokecat.sh
 
 1)  Install dependencies. For example, for `./pokecat.sh` on macOS:
 
-        brew install catimg
+        brew install catimg coreutils
 
     , or on Ubuntu:
 
