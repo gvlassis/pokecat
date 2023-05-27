@@ -2,24 +2,23 @@
 
 ## Description
 
-pokecat is a utility that prints random pokemon (up to Generation IV) to the terminal using unicode block characters. It is meant to be added to your shell's initialization script so that a new pokemon is printed in each new shell session. It is written in Bash, with a focus on robustness, readability and extensibility. Indeed you are encouraged to look at the code yourself and adapt it to your needs and preferences!
+pokecat is a utility that prints random pokemon (up to Generation IV) to the terminal using unicode block characters.
 
-## Examples
+![](screenshot.png)
 
-![](screenshot1.png)
-![](screenshot2.png)
-![](screenshot3.png)
+## Structure
 
-## Installation
+There are 3 Bash scripts, namely `./utils.sh`, `./make_res.sh` and `./pokecat.sh`.
 
-1)
-    Clone the repository
+`./utils.sh` contains a function that checks for dependencies and is used by both `./make_res.sh` and `./pokecat.sh` for error handling. It has no dependencies.
 
-        git clone https://github.com/gvlassis/pokecat.git
+`./make_res.sh` downloads the pokemon sprites from [](https://github.com/PokeAPI/sprites) and preprocesses them with calls to [PokeAPI](https://pokeapi.co/) and ImageMagick. It creates the directory `./res` that contains 493 images, one for each pokemon, each named as `./res/ID-NAME.png`. For it to work, we need `svn`, `curl`, `jq` and `mogrify` in `PATH`. **For convenience, `./res` has been included in the repository, so there is no need to run `./make_res.sh`**.
 
-2) 
-    Install dependencies. There are two set of dependencies, the dependencies for make_res.sh (which creates the ./res folder) and the dependencies for pokecat.sh (which is the main program). The dependencies for make_res.sh are: svn, curl, jq and mogrify (ImageMagick). pokecat.sh has only one dependency: [catimg](https://github.com/posva/catimg). Note that, **for convenience purposes, the ./res folder that is created by make_res.sh is already in the repository. Thus, to run pokecat.sh you only need the second set of dependencies (catimg)**.
-    For example, on macOS using Homebrew:
+`./pokecat.sh` prints a random pokemon from `./res` to the terminal using `catimg` (the only dependency of `./pokecat.sh`). You can trivially change `catimg` to any terminal image viewer of your choice.
+
+## Instructions
+
+1)  Install dependencies. For example, for `./pokecat.sh` on macOS:
 
         brew install catimg
 
@@ -27,18 +26,20 @@ pokecat is a utility that prints random pokemon (up to Generation IV) to the ter
 
         apt install catimg
 
-3) 
-    cd to the cloned repository and run make_res.sh and/or pokecat.sh. Note that both scripts output helpful error messages in case of problems.
+2)  Clone the repository:
+
+        git clone https://github.com/gvlassis/pokecat.git
+
+3)  cd to the cloned repository and run a script. For example, for `./pokecat.sh`:
 
         cd pokecat
         ./pokecat.sh
 
-4) 
-    You can create a link of your choice (e.g. pokecat, pcat, pk) and add it to a directory that is in your PATH. For example, assuming the repository was cloned under ~/.local/share and that ~/.local/bin is in your PATH:
+4)  You can create a link of your choice (e.g. `pkcat`) and add it to a directory that is in your `PATH`. For example, *assuming  `~/.local/bin` is in your `PATH`*:
 
-        ln -sf "${HOME}/.local/share/pokecat/pokecat.sh" "${HOME}/.local/bin/pcat"
-        pcat
+        ln -sf "${PWD}/pokecat.sh" "${HOME}/.local/bin/pkcat"
+        pkcat
 
-    Another good idea might be to **call pokecat.sh in your shell's initialization script** (e.g. .bashrc, .zshrc). For example, for Bash:
+    Another good idea might be to call `./pokecat.sh` in your shell's initialization script (e.g. `.bashrc`, `.zshrc`). For example, for Bash:
 
-        printf "${HOME}/.local/share/pokecat/pokecat.sh\n" >> "${HOME}/.bashrc"
+        printf "${PWD}/pokecat.sh\n" >> "${HOME}/.bashrc"
