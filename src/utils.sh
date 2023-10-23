@@ -1,12 +1,8 @@
-#!/usr/bin/env bash
-# SPDX-FileCopyrightText: © 2023 Project's authors 
-# SPDX-License-Identifier: MIT
-
 function check_dependencies(){
-    local dependencies=$@
+    local dependencies="${@}"
 
     for dependency in $dependencies; do
-        if ! command -v "${dependency}" &>/dev/null; then
+        if ! which -s "${dependency}"; then
             if [ -n "${missing_dependencies}" ]; then
                 local missing_dependencies="${missing_dependencies}, ${dependency}"
             else
@@ -17,7 +13,7 @@ function check_dependencies(){
 
     if [ -n "${missing_dependencies}" ]; then
         local script_path="$(readlink -f "${0}")"
-        printf "\e[91;1m${script_path} (Error): The following dependencies are not in PATH: ${missing_dependencies}.\e[0m\n" >& 2
+        printf "\e[31m${script_path}: The following dependencies are not in PATH: ${missing_dependencies}\e[0m\n" >& 2
         exit 1
     fi
 }

@@ -1,19 +1,15 @@
-#!/usr/bin/env bash
-# SPDX-FileCopyrightText: © 2023 Project's authors 
-# SPDX-License-Identifier: MIT
-
 script_path="$(readlink -f "${0}")"
-root_path="$(dirname "${script_path}")"
-source "${root_path}/utils.sh"
-check_dependencies svn curl jq mogrify
-  
-# Use subversion to download only the directory containing the platinum sprites. Use export to exclude .svn.
-printf "\e[92;1mDownloading directory with sprites\e[0m\n"
-svn export --force -q https://github.com/PokeAPI/sprites/trunk/sprites/pokemon/versions/generation-iv/platinum "${root_path}/res"
-printf "\e[92;1mDone!\e[0m\n"
+src_path="$(dirname "${script_path}")"
+root_path="$(dirname "${src_path}")"
+. "${src_path}/utils.sh"
+check_dependencies svn curl mogrify
 
-# Remove useless resources 
-rm -r "${root_path}/res/back" "${root_path}/res/shiny" "${root_path}/res/female"
+# Use subversion to download only the directory containing the platinum sprites. Use export to exclude .svn.
+printf "Downloading directory with sprites\n"
+svn export --force -q https://github.com/PokeAPI/sprites/trunk/sprites/pokemon/versions/generation-iv/platinum "${root_path}/res"
+
+# Remove useless resources
+rm -rf "${root_path}/res/back" "${root_path}/res/shiny" "${root_path}/res/female"
 
 # Keep only one Unown form
 rm "${root_path}/res/201-"*
@@ -40,13 +36,12 @@ rm "${root_path}/res/492-"*
 # Keep only one Arceus form
 rm "${root_path}/res/493-"*
 
-printf "\e[92;1mCalling PokeAPI to get names\e[0m\n"
+printf "Calling PokeAPI to get names\n"
 for id in {1..493}; do
-    printf "\e[92;1m${id}/493\e[0m\n"
-    name="$(curl -LsS "https://pokeapi.co/api/v2/pokemon/${id}" | jq -r ".name")"
+    printf "${id}/493\n"
+    name=$(curl -LsS "https://pokeapi.co/api/v2/pokemon/${id}" | python3 -c "import json,sys; obj=json.load(sys.stdin); print(obj['name'])")
     mv "${root_path}/res/${id}.png" "${root_path}/res/${id}-${name^}.png"
 done
-printf "\e[92;1mDone!\e[0m\n" 
 
 # Hardcoded renames
 mv "${root_path}/res/386-Deoxys-normal.png" "${root_path}/res/386-Deoxys.png"
