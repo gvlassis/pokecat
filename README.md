@@ -49,4 +49,4 @@ make_res.sh downloads the pokemon sprites from <https://github.com/PokeAPI/sprit
 
 > NOTE: For convenience, ./res has been included in the repository, so there is no need to run make_res.sh.
 
-pokecat.sh prints a random pokemon from ./res to the terminal using catimg (the only dependency of pokecat.sh). You can trivially change catimg to any terminal image viewer of your choice.
+pokecat.sh prints a random pokemon from ./res to the terminal using [catimg](https://github.com/posva/catimg) (the only dependency of pokecat.sh). You can trivially change [catimg](https://github.com/posva/catimg) to any terminal image viewer of your choice.
