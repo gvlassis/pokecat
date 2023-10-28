@@ -7,6 +7,8 @@ pokecat contains two *main* scripts:
 1. make_res.sh creates the ./res directory (which is contained in the git repo for convenience)
 1. pokecat.sh prints random pokemon (up to Generation IV), contained in ./res, to the terminal using unicode block characters.
 
+https://github.com/gvlassis/pokecat/assets/74119653/50b3ebe7-1456-450a-91b5-a97d0a3efb9f
+
 ## TODO
 \-
 
